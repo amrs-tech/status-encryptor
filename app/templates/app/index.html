@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>StatCryptor</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/js/bootstrap.min.js" integrity="sha384-ChfqqxuZUCnJSK3+MXmPNIyE6ZbWh2IMqE241rYiqJxyMiZ6OW/JmZQ5stwEULTy" crossorigin="anonymous"></script>
+    <style>
+        #div{
+            width: 50%;
+            margin: auto;
+            border: 2px dashed #dddddd;
+            padding: 15px;
+            border-radius: 6px;
+            box-shadow: 4px 8px 7px grey;
+        }
+        textarea{
+            border-radius: 5px;
+            width:inherit;
+        }
+        @media (max-width: 768px) {
+            textarea{
+                width:inherit;
+            }
+            #div{
+                width: 85%;
+            }
+        }
+    </style>
+    <script>
+        function myFunction() {
+
+            var copyText = document.getElementById("myInput");
+
+            copyText.select();
+
+            document.execCommand("copy");
+
+        }
+    </script>
+</head>
+<body>
+    <br>
+    <marquee>{Paste your whatsapp text status to encrypt in any of the two below methods}</marquee>
+    <br>
+    <div align="center" id="div">
+        <h3>Status Encryptor</h3>
+        <form action="{% url 'app:index' %}" method = "POST" name="form">
+            {% csrf_token %}
+            <div>
+                <input class="form-control" type = "text" name="text" placeholder="Enter status text">
+            </div>
+            <br>
+                <input type = "radio" name="choice" value="char">charEncrypt<br>
+                <input type = "radio" name="choice" value="sym">symEncrypt
+            <br><br>
+            <div>
+                <input type="submit" value="Encrypt" class="btn btn-primary">
+            </div>
+        </form>
+        <br><br>
+        <textarea rows="5" id="myInput">{{data}}</textarea><br>
+
+        <button class="btn btn-primary" onclick="myFunction()">Copy text</button>
+    </div>
+</body>
+</html>
